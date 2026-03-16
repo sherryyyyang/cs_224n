@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enhancing Partisanship Prediction in Congressional Speeches | CS224N</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header>
+    <h1>Enhancing Partisanship Prediction in Congressional Speeches</h1>
+    <p class="subtitle">Stanford CS224N Natural Language Processing with Deep Learning — Custom Project</p>
+  </header>
+
+  <main>
+    <section id="overview">
+      <h2>Project overview</h2>
+      <p>This project examines methods for improving partisanship prediction in congressional speeches by experimenting with <strong>transfer learning</strong>, <strong>feature engineering</strong>, and multiple transformer-based models. We introduce novel datasets on abortion, firearms, and the Iraq War to understand the impact of domain-specific knowledge and dataset characteristics on model performance. Our results show that larger, more divisive datasets (e.g., abortion) noticeably enhance accuracy compared to smaller datasets (e.g., firearms), and that incorporating temporal and geographic features further improves the model.</p>
+      <p><strong>Goal:</strong> Showcase (1) AI-assisted data wrangling, (2) model training, and (3) insights from the model — especially <strong>features indicative of the label</strong> (party affiliation).</p>
+    </section>
+
+    <section id="data">
+      <h2>Data wrangling and AI-assisted analysis</h2>
+      <p>We used the <strong>Stanford Congressional Record</strong> dataset (100th–111th Congresses, 1987–2010). For data processing we joined each speech with speaker information (party, date, state, chamber).</p>
+      <h3>Preliminary experiments with GPT-3.5 Turbo</h3>
+      <p>Preliminary analysis with <strong>GPT-3.5 Turbo</strong> on the raw international-relations dataset showed that the model performed well on ally/adversary classification but <strong>struggled on partisanship</strong>, motivating refined datasets and transfer learning.</p>
+      <table>
+        <caption>Table 1: Classification results from raw dataset (GPT-3.5 Turbo)</caption>
+        <thead>
+          <tr><th>Task</th><th>Accuracy</th><th>F1 Score</th><th>Precision</th><th>Recall</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ally/Adversary</td><td>0.8250</td><td>0.8158</td><td>0.8611</td><td>0.7750</td></tr>
+          <tr><td>Partisanship</td><td>0.5950</td><td>0.6161</td><td>0.5855</td><td>0.65</td></tr>
+        </tbody>
+      </table>
+      <h3>Novel datasets</h3>
+      <p>We built <strong>transfer-domain</strong> datasets (abortion, firearms) and a <strong>target-domain</strong> dataset (Iraq War from 2003). Topics were chosen with input from political science experts; we used keyword filtering and manual screening. Train/validation/test split: 70/10/20.</p>
+      <table>
+        <caption>Table 2: Counts of party affiliations in train/val/test sets</caption>
+        <thead>
+          <tr><th>Split</th><th>Domain</th><th>Democrat</th><th>Republican</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Train</td><td>Firearms</td><td>1204</td><td>917</td><td>2121</td></tr>
+          <tr><td>Train</td><td>Abortion</td><td>3328</td><td>4237</td><td>7565</td></tr>
+          <tr><td>Train</td><td>Iraq</td><td>3715</td><td>3670</td><td>7385</td></tr>
+          <tr><td>Val</td><td>Firearms</td><td>274</td><td>257</td><td>531</td></tr>
+          <tr><td>Val</td><td>Abortion</td><td>833</td><td>1034</td><td>1867</td></tr>
+          <tr><td>Val</td><td>Iraq</td><td>531</td><td>408</td><td>939</td></tr>
+          <tr><td>Test</td><td>Iraq</td><td>1061</td><td>1021</td><td>2082</td></tr>
+          <tr><td>Total</td><td>—</td><td>10946</td><td>11544</td><td>22490</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="training">
+      <h2>Model training</h2>
+      <p><strong>Transfer learning:</strong> Models were fine-tuned on a transfer domain (abortion and/or firearms) then on the Iraq dataset; all evaluation is on the Iraq test set.</p>
+      <p><strong>Models:</strong> Baseline bidirectional LSTM; transformer-based mDeBERTa-v3, DeBERTa-v3, and RoBERTa (with LoRA for efficiency where applicable).</p>
+      <p><strong>Feature engineering:</strong> We added <strong>temporal (year)</strong> and <strong>geographic (state)</strong> features by prepending &ldquo;year {year}&rdquo; and/or &ldquo;state {state}&rdquo; to the speech text — these are important <strong>features indicative of the label</strong>.</p>
+      <figure>
+        <img src="assets/architecture.png" alt="Experiment architecture: transfer domain to target domain, DeBERTa-v3 model pipeline">
+        <figcaption>Figure: Experiment architecture (transfer domain → fine-tune on Iraq; DeBERTa-v3 pipeline)</figcaption>
+      </figure>
+    </section>
+
+    <section id="results">
+      <h2>Results</h2>
+      <h3>Stage 1: Transfer learning</h3>
+      <table>
+        <caption>Table 3: Stage 1 results</caption>
+        <thead>
+          <tr><th>Model</th><th>Transfer domain</th><th>Accuracy</th><th>Macro F1</th><th>Macro Precision</th><th>Macro Recall</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>LSTM</td><td>—</td><td>0.6278</td><td>0.5992</td><td>0.6081</td><td>0.6015</td></tr>
+          <tr><td>LSTM</td><td>Firearm</td><td>0.5692</td><td>0.6519</td><td>0.7004</td><td>0.6873</td></tr>
+          <tr><td>LSTM</td><td>Abortion</td><td>0.6955</td><td>0.7210</td><td>0.7437</td><td>0.7321</td></tr>
+          <tr><td>mDeBERTa-v3</td><td>—</td><td>0.7918</td><td>0.8739</td><td>0.8741</td><td>0.8736</td></tr>
+          <tr><td>mDeBERTa-v3</td><td>Firearm</td><td>0.7822</td><td>0.8638</td><td>0.8622</td><td>0.8674</td></tr>
+          <tr><td>mDeBERTa-v3</td><td>Abortion</td><td>0.8192</td><td>0.8947</td><td>0.8967</td><td>0.8942</td></tr>
+          <tr><td>mDeBERTa-v3</td><td>Merged</td><td>0.7973</td><td>0.8779</td><td>0.8761</td><td>0.8815</td></tr>
+        </tbody>
+      </table>
+      <h3>Stage 2: Feature engineering and best model</h3>
+      <p>The best-performing model was <strong>M11: DeBERTa-v3 + abortion transfer + state features</strong> (accuracy <strong>0.9361</strong>).</p>
+      <table>
+        <caption>Table 4: Stage 2 results (selected models; M11 = best)</caption>
+        <thead>
+          <tr><th>Model</th><th>Transfer domain</th><th>Features</th><th>Accuracy</th><th>Macro F1</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>B1 LSTM</td><td>—</td><td>—</td><td>0.6278</td><td>0.5992</td></tr>
+          <tr><td>B2 LSTM</td><td>Abortion</td><td>—</td><td>0.6955</td><td>0.6784</td></tr>
+          <tr><td>M5 DeBERTa-v3</td><td>—</td><td>—</td><td>0.8890</td><td>0.8888</td></tr>
+          <tr><td>M8 DeBERTa-v3</td><td>—</td><td>year+state</td><td>0.9270</td><td>0.9268</td></tr>
+          <tr><td>M9 DeBERTa-v3</td><td>Abortion</td><td>—</td><td>0.8818</td><td>0.8813</td></tr>
+          <tr class="highlight"><td>M11 DeBERTa-v3</td><td>Abortion</td><td>state</td><td><strong>0.9361</strong></td><td><strong>0.9361</strong></td></tr>
+          <tr><td>M13 RoBERTa</td><td>—</td><td>—</td><td>0.8650</td><td>0.8649</td></tr>
+          <tr><td>M17 RoBERTa</td><td>Abortion</td><td>—</td><td>0.8742</td><td>0.8739</td></tr>
+        </tbody>
+      </table>
+      <figure>
+        <img src="assets/confusion_matrix.png" alt="Confusion matrix for best model M11">
+        <figcaption>Figure: Confusion matrix for best model (M11)</figcaption>
+      </figure>
+    </section>
+
+    <section id="insights">
+      <h2>Insights and important features</h2>
+      <ul>
+        <li><strong>Best model (M11):</strong> DeBERTa-v3 with <strong>state</strong> features and transfer learning from the abortion dataset. <strong>State</strong> is a strong feature indicative of the label.</li>
+        <li><strong>Transfer domain:</strong> The larger, more divisive abortion dataset outperformed the smaller firearms dataset — dataset size and divisiveness matter for transfer learning.</li>
+        <li><strong>Feature importance:</strong> Adding temporal (year) and geographic (state) context improved accuracy; for M11, state alone gave the best result.</li>
+        <li><strong>N-grams analysis:</strong> Misclassified examples often had neutral or context-specific language (e.g. &ldquo;on the other side of the aisle,&rdquo; &ldquo;enemy action in al Anbar&rdquo;), highlighting which linguistic/contextual features are indicative of the label.</li>
+      </ul>
+      <figure>
+        <img src="assets/top_3grams.png" alt="Analysis of top 3-grams in misclassified examples">
+        <figcaption>Figure: Top 3-grams in misclassified examples (False Republican vs False Democrat)</figcaption>
+      </figure>
+    </section>
+
+    <section id="code">
+      <h2>Code and materials</h2>
+      <p>Code and notebooks are in the repository:</p>
+      <ul>
+        <li><a href="https://github.com/sherryyyyang/cs_224n/tree/main/Code">Code</a> — Models (LSTM, BERT, DeBERTa, Llama, GPT) and iterative analysis</li>
+        <li><a href="https://github.com/sherryyyyang/cs_224n/tree/main/Evaluation">Evaluation</a> — Evaluation and dataset processing notebooks</li>
+      </ul>
+      <p>The full final report and poster PDFs are available locally (not uploaded to the repo; showcased here instead).</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>CS224N Custom Project — Enhancing Partisanship Prediction in Congressional Speeches</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,148 @@
+/* CS224N Project Showcase — simple, readable single-page layout */
+
+:root {
+  --text: #1a1a1a;
+  --muted: #555;
+  --bg: #fafafa;
+  --border: #e0e0e0;
+  --accent: #0d47a1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e8e8e8;
+    --muted: #aaa;
+    --bg: #1a1a1a;
+    --border: #333;
+    --accent: #64b5f6;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+main section {
+  margin-bottom: 2.5rem;
+}
+
+h2 {
+  font-size: 1.35rem;
+  margin: 0 0 0.75rem 0;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 1.25rem 0 0.5rem 0;
+}
+
+p {
+  margin: 0 0 0.75rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+th {
+  background: var(--border);
+  font-weight: 600;
+}
+
+tr.highlight td {
+  background: rgba(13, 71, 161, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  tr.highlight td {
+    background: rgba(100, 181, 246, 0.12);
+  }
+}
+
+figure {
+  margin: 1.5rem 0;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+}
+
+figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+ul {
+  margin: 0.5rem 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin: 0.35rem 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
