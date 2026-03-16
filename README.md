@@ -13,5 +13,5 @@ Project Motivations: The rise in political polarization in the U.S. has intensif
 
 Project Goals: Enhance model performance by incorporating transfer learning, feature engineering, and model selection. We experiment with various transformer‐based models and introduce new datasets to improve political speech classification. 
 
-**[Demo](https://sherryyyyang.github.io/cs_224n/)** — results, figures, and tables from the project (GitHub Pages).
+**[See Demo website here](https://sherryyyyang.github.io/cs_224n/)** — results, figures, and tables from the project (GitHub Pages).
 
