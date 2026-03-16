@@ -17,5 +17,11 @@ Students gain a thorough introduction to the basics of Deep Learning for NLP and
 
 ---
 
-**[Demo](https://sherryyyyang.github.io/cs_224n/demo/index.html)** — interactive visualization, results, and figures (GitHub Pages).  
-*(The link above is the live site. To preview locally, open `demo/index.html` in your browser. If the live link shows this README, set Pages to the **demo** folder: Settings → Pages → Branch: main → Folder: **demo**.)*
+## Demo
+
+| | |
+|---|---|
+| **Live** | [**Demo**](https://sherryyyyang.github.io/cs_224n/demo/index.html) — visualization, results, and figures (GitHub Pages) |
+| **Local** | Open `demo/index.html` in your browser to preview. |
+
+*If the live link shows this README instead of the demo, set **Settings → Pages → Branch: main → Folder: demo**.*
