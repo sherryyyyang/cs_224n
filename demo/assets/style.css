@@ -1,20 +1,26 @@
-/* CS224N Project Showcase — simple, readable single-page layout */
+/* CS224N Project Showcase — visualization and results */
 
 :root {
   --text: #1a1a1a;
   --muted: #555;
-  --bg: #fafafa;
-  --border: #e0e0e0;
+  --bg: #f8f9fa;
+  --border: #dee2e6;
   --accent: #0d47a1;
+  --accent-soft: rgba(13, 71, 161, 0.12);
+  --best: #1565c0;
+  --best-soft: rgba(21, 101, 192, 0.15);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #e8e8e8;
     --muted: #aaa;
-    --bg: #1a1a1a;
+    --bg: #121212;
     --border: #333;
     --accent: #64b5f6;
+    --accent-soft: rgba(100, 181, 246, 0.12);
+    --best: #90caf9;
+    --best-soft: rgba(144, 202, 249, 0.15);
   }
 }
 
@@ -32,13 +38,116 @@ body {
   padding: 1.5rem;
 }
 
-header {
+/* Hero: clear demo identity, not README */
+.hero {
+  margin-bottom: 2.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.02em;
+}
+
+.hero .subtitle {
+  margin: 0 auto 1.5rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+.hero-metric {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-soft);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.hero-metric-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.hero-metric-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* Accuracy bar chart */
+.viz-section {
+  margin-bottom: 2.5rem;
+}
+
+.viz-desc {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.bar-chart {
+  max-width: 42rem;
+  margin: 1rem 0;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.bar-row-best .bar-label { font-weight: 600; }
+
+.bar-label {
+  flex: 0 0 220px;
+  font-size: 0.9rem;
+}
+
+.bar-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.bar {
+  height: 1.5rem;
+  min-width: 2%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.bar-best {
+  background: var(--best);
+  box-shadow: 0 0 0 2px var(--best-soft);
+}
+
+.bar-value {
+  flex: 0 0 3.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+header:not(.hero) {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
 }
 
-header h1 {
+header:not(.hero) h1 {
   font-size: 1.75rem;
   font-weight: 700;
   margin: 0 0 0.25rem 0;
@@ -95,12 +204,12 @@ th {
 }
 
 tr.highlight td {
-  background: rgba(13, 71, 161, 0.08);
+  background: var(--accent-soft);
 }
 
 @media (prefers-color-scheme: dark) {
   tr.highlight td {
-    background: rgba(100, 181, 246, 0.12);
+    background: var(--accent-soft);
   }
 }
 

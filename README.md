@@ -1,17 +1,21 @@
 # cs_224n
 
+## Course
 
-CS224N Natural Language Processing with Deep Learning (winter 2025)
+**CS224N Natural Language Processing with Deep Learning** (Winter 2025)
 
-In this course, students will gain a thorough introduction to both the basics of Deep Learning for NLP and the latest cutting-edge research on Large Language Models (LLMs). Through lectures, assignments and a final project, students will learn the necessary skills to design, implement, and understand their own neural network models, using the Pytorch framework.
+Students gain a thorough introduction to the basics of Deep Learning for NLP and the latest research on Large Language Models (LLMs). Through lectures, assignments, and a final project, they learn to design, implement, and understand neural network models using PyTorch.
 
+---
 
+## Project
 
-Project name: Enhancing Partisanship Prediction in Congressional Speeches
+**Enhancing Partisanship Prediction in Congressional Speeches**
 
-Project Motivations: The rise in political polarization in the U.S. has intensified the need to identify party affiliation in congressional speeches accurately. Prior work has shown the potential of language models in detecting partisan bias, but the challenge remains in applying these models across diverse and limited datasets.
+- **Motivation:** The rise in political polarization in the U.S. has intensified the need to identify party affiliation in congressional speeches accurately. Prior work has shown the potential of language models in detecting partisan bias, but the challenge remains in applying these models across diverse and limited datasets.
+- **Goals:** Enhance model performance via transfer learning, feature engineering, and model selection; experiment with transformer-based models and introduce new datasets to improve political speech classification.
 
-Project Goals: Enhance model performance by incorporating transfer learning, feature engineering, and model selection. We experiment with various transformer‐based models and introduce new datasets to improve political speech classification. 
+---
 
-**[Demo](https://sherryyyyang.github.io/cs_224n/)** — results, figures, and tables from the project (GitHub Pages).
-
+**[Demo](https://sherryyyyang.github.io/cs_224n/demo/index.html)** — interactive visualization, results, and figures (GitHub Pages).  
+*(The link above is the live site. To preview locally, open `demo/index.html` in your browser. If the live link shows this README, set Pages to the **demo** folder: Settings → Pages → Branch: main → Folder: **demo**.)*

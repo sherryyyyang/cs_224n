@@ -7,12 +7,28 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <header>
+  <header class="hero">
     <h1>Enhancing Partisanship Prediction in Congressional Speeches</h1>
-    <p class="subtitle">Stanford CS224N Natural Language Processing with Deep Learning — Custom Project</p>
+    <p class="subtitle">Stanford CS224N — Transfer learning, feature engineering, and transformer models for party classification</p>
+    <div class="hero-metric">
+      <span class="hero-metric-value">93.6%</span>
+      <span class="hero-metric-label">Best accuracy (M11: DeBERTa-v3 + state + abortion transfer)</span>
+    </div>
   </header>
 
   <main>
+    <section id="accuracy-viz" class="viz-section">
+      <h2>Model accuracy at a glance</h2>
+      <p class="viz-desc">Stage 1 transfer learning: abortion transfer outperforms firearms; transformers outperform LSTM.</p>
+      <div class="bar-chart" role="img" aria-label="Bar chart of model accuracy">
+        <div class="bar-row"><span class="bar-label">LSTM (no transfer)</span><div class="bar-wrap"><div class="bar" style="width: 62.8%"></div><span class="bar-value">62.8%</span></div></div>
+        <div class="bar-row"><span class="bar-label">LSTM + Abortion</span><div class="bar-wrap"><div class="bar" style="width: 69.6%"></div><span class="bar-value">69.6%</span></div></div>
+        <div class="bar-row"><span class="bar-label">mDeBERTa-v3 (no transfer)</span><div class="bar-wrap"><div class="bar" style="width: 79.2%"></div><span class="bar-value">79.2%</span></div></div>
+        <div class="bar-row"><span class="bar-label">mDeBERTa-v3 + Abortion</span><div class="bar-wrap"><div class="bar" style="width: 81.9%"></div><span class="bar-value">81.9%</span></div></div>
+        <div class="bar-row bar-row-best"><span class="bar-label">M11 DeBERTa-v3 + state + Abortion</span><div class="bar-wrap"><div class="bar bar-best" style="width: 93.6%"></div><span class="bar-value">93.6%</span></div></div>
+      </div>
+    </section>
+
     <section id="overview">
       <h2>Project overview</h2>
       <p>This project examines methods for improving partisanship prediction in congressional speeches by experimenting with <strong>transfer learning</strong>, <strong>feature engineering</strong>, and multiple transformer-based models. We introduce novel datasets on abortion, firearms, and the Iraq War to understand the impact of domain-specific knowledge and dataset characteristics on model performance. Our results show that larger, more divisive datasets (e.g., abortion) noticeably enhance accuracy compared to smaller datasets (e.g., firearms), and that incorporating temporal and geographic features further improves the model.</p>
@@ -128,7 +144,6 @@
         <li><a href="https://github.com/sherryyyyang/cs_224n/tree/main/Code">Code</a> — Models (LSTM, BERT, DeBERTa, Llama, GPT) and iterative analysis</li>
         <li><a href="https://github.com/sherryyyyang/cs_224n/tree/main/Evaluation">Evaluation</a> — Evaluation and dataset processing notebooks</li>
       </ul>
-      <p>The full final report and poster PDFs are available locally (not uploaded to the repo; showcased here instead).</p>
     </section>
   </main>
 
