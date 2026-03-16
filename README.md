@@ -17,7 +17,11 @@ Students gain a thorough introduction to the basics of Deep Learning for NLP and
 
 ---
 
+<<<<<<< HEAD
 ## Demo
+=======
+**[# 🎯 See Demo website here](https://sherryyyyang.github.io/cs_224n/)** — results, figures, and tables from the project (GitHub Pages).
+>>>>>>> c643048b44aa03fb13d69afdee3a1c696d095228
 
 | | |
 |---|---|
