@@ -4,3 +4,7 @@ Raw_data/
 # Final deliverables (showcased via GitHub Pages instead)
 CS224N_Spring_2024__Project_Final_Report.pdf
 CS_224N_Poster.pdf
+
+# Local-only files (kept on disk, not tracked)
+.Rhistory
+*.code-workspace
