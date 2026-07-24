@@ -8,3 +8,7 @@ CS_224N_Poster.pdf
 # Local-only files (kept on disk, not tracked)
 .Rhistory
 *.code-workspace
+
+# OS / editor
+.DS_Store
+Thumbs.db

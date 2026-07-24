@@ -1,0 +1,18 @@
+# Notebook dependencies (originally run on GPU in Colab / Stanford compute).
+# Data processing & baseline
+numpy
+pandas
+scikit-learn
+matplotlib
+tensorflow>=2.12        # bidirectional LSTM baseline (.h5 weights + embedding matrix)
+
+# Transformer models — DeBERTa-v3, mDeBERTa-v3, RoBERTa (LoRA fine-tuning)
+torch
+transformers
+peft
+datasets
+accelerate
+sentencepiece          # required by the DeBERTa tokenizers
+
+# Preliminary GPT-3.5 Turbo experiments
+openai
